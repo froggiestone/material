@@ -49,7 +49,7 @@ function MdDialogDirective($$rAF, $mdTheming) {
  *
  * @usage
  * <hljs lang="html">
- * <div  ng-app="demoApp" ng-controller="EmployeeController">
+ * <div ng-controller="EmployeeController">
  *   <div>
  *     <md-button ng-click="showAlert()" class="md-raised md-warn">
  *       Employee Alert!

@@ -3,7 +3,9 @@
     .factory('$codepen', ['$demoAngularScripts', '$document', Codepen]);
 
   function Codepen($demoAngularScripts, $document) {
-    var translator = new ExampleFilesToCodepenDataTranslator();
+    var translator = new MutateIndexContentTranslatorDecorator(
+      new ExampleFilesToCodepenDataTranslator()
+    );
 
     return {
       editExample: editExample
@@ -20,7 +22,7 @@
     function buildForm(data) {
       var url = 'http://codepen.io/pen/define/';
       var form = angular.element('<form style="display: none;" method="post" target="_blank" action="' + url + '"></form>');
-      var input = angular.element('<input type="hidden" name="data" value="' + cleanseJson(data) + '" />');
+      var input = '<input type="hidden" name="data" value="' + cleanseJson(data) + '" />';
       form.append(input);
       return form;
     };
@@ -31,6 +33,7 @@
         .replace(/"/g, "&apos;");
     };
   };
+
 
   function ExampleFilesToCodepenDataTranslator() {
     var coreJs = 'http://rawgit.com/angular/bower-material/master/angular-material.js';
@@ -63,6 +66,24 @@
       return files.map(function(file) {
         return file.contents;
       });
+    };
+  };
+
+  function MutateIndexContentTranslatorDecorator(decorated) {
+    return {
+      translate: translate
+    };
+
+    function translate(demo, externalScripts) {
+      appendDemoDataToIndex(demo);
+      return decorated.translate(demo, externalScripts);
+    };
+
+    function appendDemoDataToIndex(demo) {
+      var tmp = angular.element(demo.files.index.contents);
+      tmp.addClass(demo.id);
+      tmp.attr('ng-app', demo.module);
+      demo.files.index.contents = tmp[0].outerHTML;
     };
   };
 })();

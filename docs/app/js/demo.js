@@ -51,7 +51,12 @@ function($mdUtil) {
         .concat(self.files.html || []);
 
       self.editExample = function() {
-        $codepen.editExample({title: self.demoTitle, files: self.files});
+        $codepen.editExample({
+          title: self.demoTitle,
+          files: self.files,
+          id: self.demoId,
+          module: self.demoModule
+        });
       }
     };
 
@@ -81,7 +86,7 @@ function($mdUtil) {
 
     return function postLink(scope, element, attr, docsDemoCtrl) {
       docsDemoCtrl.addFile(
-        $interpolate(name)(scope), 
+        $interpolate(name)(scope),
         $q.when(scope.$eval(contentsAttr) || html)
       );
       element.remove();
