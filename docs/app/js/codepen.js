@@ -18,7 +18,6 @@
     };
 
     function buildForm(data) {
-      var target = '_blank';
       var url = 'http://codepen.io/pen/define/';
       var form = angular.element('<form style="display: none;" method="post" target="_blank" action="' + url + '"></form>');
       var input = angular.element('<input type="hidden" name="data" value="' + cleanseJson(data) + '" />');
