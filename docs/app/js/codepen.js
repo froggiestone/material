@@ -34,20 +34,23 @@
   };
 
   function ExampleFilesToCodepenDataTranslator() {
+    var coreJs = 'http://rawgit.com/angular/bower-material/master/angular-material.js';
+    var coreCss = 'http://rawgit.com/angular/bower-material/master/angular-material.css';
+
     return {
       translate: translate
     };
 
-    //TODO: need to change this to use angular-material.js/css
     function translate(demo, externalScripts) {
       var files = demo.files;
+
       return {
         title: demo.title,
         html: mergeHtml(files).join(' '),
         css: mergeFiles(files.css).join(' '),
         js: mergeFiles(files.js).join(' '),
-        js_external: externalScripts.concat(['https://material.angularjs.org/docs.js']).join(';') || '',
-        css_external: 'https://material.angularjs.org/docs.css'
+        js_external: externalScripts.concat([coreJs]).join(';') || '',
+        css_external: coreCss
       };
     };
 
