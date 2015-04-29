@@ -1,0 +1,7 @@
+code:before {
+  content: "<"
+}
+
+code:after {
+  content: ">"
+}
