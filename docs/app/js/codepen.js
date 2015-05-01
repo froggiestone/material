@@ -37,6 +37,7 @@
 
   function ExampleFilesToCodepenDataTranslator() {
     var coreJs = 'http://rawgit.com/angular/bower-material/master/angular-material.js';
+    var assetCacheJs = 'https://rawgit.com/angular/material/wip/edit-example-on-codepen/docs/app/asset-cache.js';
     var coreCss = 'http://rawgit.com/angular/bower-material/master/angular-material.css';
 
     return {
@@ -51,7 +52,7 @@
         html: mergeHtml(files).join(' '),
         css: mergeFiles(files.css).join(' '),
         js: mergeFiles(files.js).join(' '),
-        js_external: externalScripts.concat([coreJs]).join(';') || '',
+        js_external: externalScripts.concat([coreJs, assetCacheJs]).join(';') || '',
         css_external: coreCss
       };
     };
@@ -76,14 +77,22 @@
 
     function translate(demo, externalScripts) {
       appendDemoDataToIndex(demo);
+      replaceDocsSiteModuleWithCodepenModule(demo);
       return decorated.translate(demo, externalScripts);
     };
 
     function appendDemoDataToIndex(demo) {
       var tmp = angular.element(demo.files.index.contents);
       tmp.addClass(demo.id);
-      tmp.attr('ng-app', demo.module);
+      tmp.attr('ng-app', 'editable-example');
       demo.files.index.contents = tmp[0].outerHTML;
+    };
+
+    function replaceDocsSiteModuleWithCodepenModule(demo) {
+      for(var i = 0; i < demo.files.js.length; i++) {
+        var tmp = demo.files.js[i].contents;
+        demo.files.js[i].contents = tmp.replace(demo.module, 'editable-example');
+      };
     };
   };
 })();
