@@ -30,7 +30,9 @@
     function cleanseJson(json) {
       return JSON.stringify(json)
         .replace(/"/g, "&quot;")
-        .replace(/"/g, "&apos;");
+        .replace(/"/g, "&apos;")
+        .replace(/&gt;/g, "&amp;gt;")
+        .replace(/&lt;/g, "&amp;lt;");
     };
   };
 
