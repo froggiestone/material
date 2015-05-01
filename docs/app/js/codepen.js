@@ -51,18 +51,12 @@
 
       return {
         title: demo.title,
-        html: mergeHtml(files).join(' '),
+        html: demo.files.index.contents,
         css: mergeFiles(files.css).join(' '),
         js: mergeFiles(files.js).join(' '),
         js_external: externalScripts.concat([coreJs, assetCacheJs]).join(';') || '',
         css_external: coreCss
       };
-    };
-
-    function mergeHtml(files) {
-      var index = files.index.contents;
-      var additionalHtml = mergeFiles(files.html);
-      return [index].concat(additionalHtml)
     };
 
     function mergeFiles(files) {
@@ -80,6 +74,7 @@
     function translate(demo, externalScripts) {
       appendDemoDataToIndex(demo);
       replaceDocsSiteModuleWithCodepenModule(demo);
+      insertTemplatesIntoIndex(demo);
       return decorated.translate(demo, externalScripts);
     };
 
@@ -96,5 +91,15 @@
         demo.files.js[i].contents = tmp.replace(demo.module, 'editable-example');
       };
     };
+
+    function insertTemplatesIntoIndex(demo) {
+      if (demo.files.html.length) {
+        var tmp = angular.element(demo.files.index.contents);
+        angular.forEach(demo.files.html, function(template) {
+          tmp.append("<script type='text/ng-template' id='" + template.name + "'>" + template.contents + "</script>");
+        });
+        demo.files.index.contents = tmp[0].outerHTML;
+      }
+     };
   };
 })();
