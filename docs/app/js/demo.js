@@ -50,8 +50,8 @@ function($mdUtil) {
         .concat(self.files.css || [])
         .concat(self.files.html || []);
 
-      self.editExample = function() {
-        $codepen.editExample({
+      self.editOnCodepen = function() {
+        $codepen.editOnCodepen({
           title: self.demoTitle,
           files: self.files,
           id: self.demoId,

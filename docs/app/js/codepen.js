@@ -8,10 +8,10 @@
     );
 
     return {
-      editExample: editExample
+      editOnCodepen: editOnCodepen
     };
 
-    function editExample(demo) {
+    function editOnCodepen(demo) {
       var data = translator.translate(demo, $demoAngularScripts.all());
       var form = buildForm(data);
       $document.find('body').append(form);
@@ -100,6 +100,6 @@
         });
         demo.files.index.contents = tmp[0].outerHTML;
       }
-     };
+    };
   };
 })();
