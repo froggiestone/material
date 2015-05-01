@@ -25,11 +25,3 @@ div.standard {
 fieldset.standard {
   margin-left: 10px;
 }
-
-code:before {
-  content: "<"
-}
-
-code:after {
-  content: ">"
-}

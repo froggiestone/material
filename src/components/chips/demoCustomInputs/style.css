@@ -20,10 +20,3 @@ input[type=number] {
  padding: 0;
  margin: 0;
 }
-code:before {
-  content: "<"
-}
-
-code:after {
-  content: ">"
-}

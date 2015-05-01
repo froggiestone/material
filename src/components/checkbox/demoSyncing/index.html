@@ -4,14 +4,14 @@
   <div layout="row" layout-padding>
 
     <fieldset layout="column">
-      <legend>Using <code>md-checkbox</code></legend>
+      <legend>Using &lt;md-checkbox&gt;</legend>
       <md-checkbox ng-repeat="item in items" ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
         {{ item }} <span ng-if="exists(item, selected)">selected</span>
       </md-checkbox>
     </fieldset>
 
     <fieldset layout="column" class="standard">
-      <legend>Using <code>input type="checkbox"</code></legend>
+      <legend>Using &lt;input type="checkbox"&gt;</legend>
       <div ng-repeat="item in items" class="standard" >
         <label>
           <input type="checkbox" ng-checked="exists(item, selected)" ng-click="toggle(item, selected)"/>
