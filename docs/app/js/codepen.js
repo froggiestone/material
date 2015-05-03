@@ -39,7 +39,7 @@
 
   function ExampleFilesToCodepenDataTranslator() {
     var coreJs = 'http://rawgit.com/angular/bower-material/master/angular-material.js';
-    var assetCacheJs = 'https://rawgit.com/angular/material/wip/edit-example-on-codepen/docs/app/asset-cache.js';
+    var assetCacheJs = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js';
     var coreCss = 'http://rawgit.com/angular/bower-material/master/angular-material.css';
 
     return {
@@ -81,14 +81,15 @@
     function appendDemoDataToIndex(demo) {
       var tmp = angular.element(demo.files.index.contents);
       tmp.addClass(demo.id);
-      tmp.attr('ng-app', 'editable-example');
+      tmp.attr('ng-app', 'MyApp');
       demo.files.index.contents = tmp[0].outerHTML;
     };
 
     function replaceDocsSiteModuleWithCodepenModule(demo) {
+      var regex =  /\.module\(('[^']*'|"[^"]*")\s*,(?:\s*\[([^\]]*)\])?/g;
       for(var i = 0; i < demo.files.js.length; i++) {
         var tmp = demo.files.js[i].contents;
-        demo.files.js[i].contents = tmp.replace(demo.module, 'editable-example');
+        demo.files.js[i].contents = tmp.replace(regex, ".module('MyApp'");
       };
     };
 
