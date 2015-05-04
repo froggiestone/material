@@ -69,7 +69,7 @@ md-dialog {
     }
   }
 
-  .md-actions {
+  md-actions {
     display: flex;
     order: 2;
     box-sizing: border-box;
@@ -89,7 +89,7 @@ md-dialog {
       margin-top: $baseline-grid;
     }
   }
-  &.md-content-overflow .md-actions {
+  &.md-content-overflow md-actions {
     border-top: 1px solid;
   }
 

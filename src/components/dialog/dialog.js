@@ -39,7 +39,7 @@ function MdDialogDirective($$rAF, $mdTheming) {
  * - The dialog is always given an isolate scope.
  * - The dialog's template must have an outer `<md-dialog>` element.
  *   Inside, use an `<md-dialog-content>` element for the dialog's content, and use
- *   an element with class `md-actions` for the dialog's actions.
+ *   an `md-actions` element for the dialog's actions.
  * - Dialogs must cover the entire application to keep interactions inside of them.
  * Use the `parent` option to change where dialogs are appended.
  *
@@ -117,11 +117,11 @@ function MdDialogDirective($$rAF, $mdTheming) {
  *            '      </md-item>'+
  *            '    </md-list>'+
  *            '  </md-dialog-content>' +
- *            '  <div class="md-actions">' +
+ *            '  <md-actions>' +
  *            '    <md-button ng-click="closeDialog()" class="md-primary">' +
  *            '      Close Dialog' +
  *            '    </md-button>' +
- *            '  </div>' +
+ *            '  </md-actions>' +
  *            '</md-dialog>',
  *          locals: {
  *            items: $scope.items
@@ -196,11 +196,11 @@ function MdDialogDirective($$rAF, $mdTheming) {
  *
  *             '  <md-dialog-content>Hello {{ employee }}!</md-dialog-content>' +
  *
- *             '  <div class="md-actions">' +
+ *             '  <md-actions>' +
  *             '    <md-button ng-click="closeDialog()" class="md-primary">' +
  *             '      Close Greeting' +
  *             '    </md-button>' +
- *             '  </div>' +
+ *             '  </md-actions>' +
  *             '</md-dialog>',
  *           controller: 'GreetingController',
  *           onComplete: afterShowAnimation,
@@ -365,7 +365,7 @@ function MdDialogProvider($$interimElementProvider) {
             '<h2 class="md-title">{{ dialog.title }}</h2>',
             '<p>{{ dialog.content }}</p>',
           '</md-dialog-content>',
-          '<div class="md-actions">',
+          '<md-actions>',
             '<md-button ng-if="dialog.$type == \'confirm\'"' +
                       ' ng-click="dialog.abort()" class="md-primary">',
               '{{ dialog.cancel }}',
@@ -373,7 +373,7 @@ function MdDialogProvider($$interimElementProvider) {
             '<md-button ng-click="dialog.hide()" class="md-primary">',
               '{{ dialog.ok }}',
             '</md-button>',
-          '</div>',
+          '</md-actions>',
         '</md-dialog>'
       ].join(''),
       controller: function mdDialogCtrl() {
@@ -495,7 +495,7 @@ function MdDialogProvider($$interimElementProvider) {
         //button child in md-actions and assume it is a close button
         var closeButton = element[0].querySelector('.dialog-close');
         if (!closeButton) {
-          var actionButtons = element[0].querySelectorAll('.md-actions button');
+          var actionButtons = element[0].querySelectorAll('md-actions button');
           closeButton = actionButtons[ actionButtons.length - 1 ];
         }
         return angular.element(closeButton);

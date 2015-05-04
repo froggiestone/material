@@ -156,10 +156,10 @@ describe('$mdDialog', function() {
       $mdDialog.show({
         template:
           '<md-dialog>' +
-            '<div class="md-actions">' +
+            '<md-actions>' +
               '<button class="dialog-close">Close</button>' +
-            '</div>' +
-            '</md-dialog>',
+            '</md-actions>' +
+          '</md-dialog>',
         parent: parent
       });
 
@@ -365,10 +365,10 @@ describe('$mdDialog', function() {
         parent: parent,
         template:
           '<md-dialog>' +
-            '<div class="md-actions">' +
+            '<md-actions>' +
               '<button id="a">A</md-button>' +
               '<button id="focus-target">B</md-button>' +
-            '</div>' +
+            '</md-actions>' +
           '</md-dialog>'
       });
 
@@ -393,10 +393,10 @@ describe('$mdDialog', function() {
         parent: parent,
         template:
           '<md-dialog>' +
-            '<div class="md-actions">' +
+            '<md-actions>' +
               '<button id="a">A</md-button>' +
               '<button id="focus-target">B</md-button>' +
-            '</div>' +
+            '</md-actions>' +
           '</md-dialog>',
       });
 
@@ -419,10 +419,10 @@ describe('$mdDialog', function() {
       $mdDialog.show({
         template:
           '<md-dialog>' +
-            '<div class="md-actions">' +
+            '<md-actions>' +
               '<button id="a">A</md-button>' +
               '<button id="focus-target">B</md-button>' +
-            '</div>' +
+            '</md-actions>' +
           '</md-dialog>',
         parent: parent
       });
@@ -598,7 +598,7 @@ describe('$mdDialog with custom interpolation symbols', function() {
     var mdContent = mdDialog.find('md-dialog-content');
     var title = mdContent.find('h2');
     var content = mdContent.find('p');
-    var mdActions = angular.element(mdDialog[0].querySelector('.md-actions'));
+    var mdActions = angular.element(mdDialog[0].querySelector('md-actions'));
     var buttons = mdActions.find('md-button');
 
     expect(mdDialog.attr('aria-label')).toBe('test alert');
@@ -625,7 +625,7 @@ describe('$mdDialog with custom interpolation symbols', function() {
     var mdContent = mdDialog.find('md-dialog-content');
     var title = mdContent.find('h2');
     var content = mdContent.find('p');
-    var mdActions = angular.element(mdDialog[0].querySelector('.md-actions'));
+    var mdActions = angular.element(mdDialog[0].querySelector('md-actions'));
     var buttons = mdActions.find('md-button');
 
     expect(mdDialog.attr('aria-label')).toBe('test alert');
