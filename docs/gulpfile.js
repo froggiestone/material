@@ -13,6 +13,7 @@ var uglify = require('gulp-uglify');
 var utils = require('../scripts/gulp-utils.js');
 var karma = require('karma').server;
 var argv = require('minimist')(process.argv.slice(2));
+var gutil = require('gulp-util');
 
 var config = {
   demoFolder: 'demo-partials'
@@ -150,7 +151,7 @@ module.exports = function(gulp, IS_RELEASE_BUILD) {
       .pipe(gulp.dest('dist/docs/js'));
   });
 
-  gulp.task('docs-karma', ['docs-js'], function() {
+  gulp.task('docs-karma', ['docs-js'], function(done) {
     var karmaConfig = {
       singleRun: true,
       autoWatch: false,
@@ -158,6 +159,12 @@ module.exports = function(gulp, IS_RELEASE_BUILD) {
       configFile: __dirname + '/../config/karma-docs.conf.js'
     };
 
-    karma.start(karmaConfig, function(err){ });
+    karma.start(karmaConfig, function(exitCode){
+       if (exitCode != 0) {
+         gutil.log(gutil.colors.red("Karma exited with the following exit code: " + exitCode));
+         process.exit(exitCode);
+       }
+       done();
+    });
  });
 };
