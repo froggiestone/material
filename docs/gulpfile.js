@@ -11,6 +11,8 @@ var sass = require('gulp-sass');
 var through2 = require('through2');
 var uglify = require('gulp-uglify');
 var utils = require('../scripts/gulp-utils.js');
+var karma = require('karma').server;
+var argv = require('minimist')(process.argv.slice(2));
 
 var config = {
   demoFolder: 'demo-partials'
@@ -45,7 +47,7 @@ module.exports = function(gulp, IS_RELEASE_BUILD) {
           .value();
 
         var dest = path.resolve(__dirname, '../dist/docs/js');
-        var file = "angular.module('docsApp').constant('DEMOS', " + 
+        var file = "angular.module('docsApp').constant('DEMOS', " +
           JSON.stringify(demoIndex, null, 2) + ");";
         mkdirp.sync(dest);
         fs.writeFileSync(dest + '/demo-data.js', file);
@@ -88,7 +90,7 @@ module.exports = function(gulp, IS_RELEASE_BUILD) {
         }
       }));
   }
-  
+
   gulp.task('docs-generate', ['build'], function() {
     var dgeni = new Dgeni([
       require('./config')
@@ -148,4 +150,14 @@ module.exports = function(gulp, IS_RELEASE_BUILD) {
       .pipe(gulp.dest('dist/docs/js'));
   });
 
+  gulp.task('docs-karma', ['docs-js'], function() {
+    var karmaConfig = {
+      singleRun: true,
+      autoWatch: false,
+      browsers : argv.browsers ? argv.browsers.trim().split(',') : ['Chrome'],
+      configFile: __dirname + '/../config/karma-docs.conf.js'
+    };
+
+    karma.start(karmaConfig, function(err){ });
+ });
 };

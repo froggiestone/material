@@ -7,8 +7,8 @@ var DocsApp = angular.module('docsApp', ['ngMaterial', 'ngRoute', 'angularytics'
   'PAGES',
   '$routeProvider',
   '$mdThemingProvider',
-function(SERVICES, COMPONENTS, DEMOS, PAGES, $routeProvider, $mdThemingProvider) {
-  $routeProvider
+  function(SERVICES, COMPONENTS, DEMOS, PAGES, $routeProvider, $mdThemingProvider) {
+    $routeProvider
     .when('/', {
       templateUrl: 'partials/home.tmpl.html'
     })
